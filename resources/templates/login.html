@@ -1,0 +1,12 @@
+<form action="/login" method="POST">
+  {% csrf-field %}
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input type="email" class="form-control" name="email" placeholder="seuemail@exemplo.com">
+  </div>
+  <div class="form-group">
+    <label for="password">Senha</label>
+    <input type="password" class="form-control" name="password" placeholder="suasenha">
+  </div>
+  <button type="submit" class="btn btn-default">Logar</button>
+</form>

@@ -1,0 +1,11 @@
+html,
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  height: 100%;
+  padding-top: 40px;
+  background: black url("/img/background.jpg") no-repeat fixed center;
+  background-size: cover;
+}
+.nav.nav-tabs {
+  margin-bottom: 15px;
+}

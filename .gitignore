@@ -1,0 +1,12 @@
+Leiningen.gitignore
+.DS_Store
+/target
+/lib
+/classes
+/checkouts
+pom.xml
+*.jar
+*.class
+/.lein-*
+/.env
+*.log
