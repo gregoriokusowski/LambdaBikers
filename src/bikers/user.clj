@@ -10,6 +10,9 @@
 
 (defmacro wcar* [& body] `(car/wcar redis-config ~@body))
 
+(def blood-types
+  ["O+" "O-" "A+" "A-" "B+" "B-" "AB+" "AB-"])
+
 (defn- user-key [email]
   (str "u:" email))
 
@@ -41,4 +44,7 @@
 (defn sign-up [user]
   (if (b/valid? user signup-validations)
     (save user)))
+
+(defn sign-up-errors [user]
+  (b/validate user signup-validations))
 

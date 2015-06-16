@@ -14,6 +14,11 @@
             [buddy.auth.backends.session :refer [session-backend]]
             ))
 
+(defn log-request [handler]
+  (fn [req]
+    (timbre/debug req)
+    (handler req)))
+
 (defn wrap-servlet-context [handler]
   (fn [request]
     (binding [*servlet-context*
@@ -41,6 +46,7 @@
 (defn development-middleware [handler]
   (if (env :dev)
     (-> handler
+        log-request
         wrap-error-page
         wrap-exceptions)
     handler))

@@ -1,5 +1,10 @@
 <form action="/sign-up" method="POST">
   {% csrf-field %}
+  {% for error in sign-up-errors %}
+    <div class="alert alert-warning" role="alert">
+      {{error}}
+    </div>
+  {% endfor %}
   <div class="form-group">
     <label for="name">Nome</label>
     <input type="name" class="form-control" name="name" placeholder="Nome Completo">
