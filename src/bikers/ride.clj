@@ -11,7 +11,8 @@
     (assoc ride :participants participants)))
 
 (defn all []
-  (let [[_ ride-keys] (redis/wcar* (car/scan 0 "MATCH" "rides:*"))]
+  ;; (let [[_ ride-keys] (redis/wcar* (car/scan 0 "MATCH" "rides:*"))] works only on Redis 2.8+
+  (let [ride-keys (redis/wcar* (car/keys "rides:*"))]
     (map load-and-normalize ride-keys)))
 
 (defn create [params]
