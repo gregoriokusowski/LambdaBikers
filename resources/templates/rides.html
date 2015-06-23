@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<br/>
+<br/>
+<div class="row">
+
+  <div class="col-md-6 col-xs-12 col-sm-12">
+    {% for ride in rides %}
+      <div class="page-header">
+        <h1>
+          {{ride.destination}}
+          <small>{{ride.date}} - {{ride.km}}</small>
+        </h1>
+        <a class="btn btn-primary pull-right" href="/apply?ride-id={{ride.id}}">Confirmar presença!</a>
+        <!-- <ul> -->
+        <div>
+          {% for participant in ride.participants %}
+          <span class="label label-danger">
+              {{participant}}
+          </span>
+          {% endfor %}
+        </div>
+            <!-- <li > -->
+            <!-- </li> -->
+        <!-- </ul> -->
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="col-md-4 col-md-offset-1 col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0">
+  {% if authenticated %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Crie seu passeio!</h3>
+      </div>
+      <div class="panel-body">
+
+        <form action="/rides" method="POST">
+          {% csrf-field %}
+          {% if ride-errors|not-empty %}
+            <div class="alert alert-warning" role="alert">
+              {% for error in ride-errors %}
+                  {{error}}
+                  <br />
+              {% endfor %}
+            </div>
+          {% endif %}
+          <div class="form-group">
+            <label for="destination">Destino</label>
+            <input type="destination" class="form-control" name="destination" placeholder="Destino" value="{{ride.destination}}">
+          </div>
+          <div class="form-group">
+            <label for="km">Quilometragem</label>
+            <input type="km" class="form-control" name="km" placeholder="km" value="{{ride.km}}">
+          </div>
+          <div class="form-group">
+            <label for="date">Data</label>
+            <input type="date" class="form-control" name="date" placeholder="Data" value="{{ride.date}}">
+          </div>
+          <button type="submit" class="btn btn-success">Cadastrar</button>
+        </form>
+
+      </div>
+    </div>
+  {% endif %}
+  </div>
+</div>
+{% endblock %}

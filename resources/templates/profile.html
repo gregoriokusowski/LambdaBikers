@@ -8,14 +8,20 @@
           <h3 class="panel-title">Perfil</h3>
         </div>
         <div class="panel-body">
-          <form>
+          {% if message %}
+            <div class="alert alert-success" role="alert">
+              {{message}}
+            </div>
+          {% endif %}
+          <form action="/profile" method="POST">
+            {% csrf-field %}
             <div class="form-group col-md-6">
               <label for="name">Nome</label>
               <input type="text" class="form-control" id="name" name="name" value="{{user.name}}">
             </div>
             <div class="form-group col-md-6">
               <label for="birth-date">Data de Nascimento</label>
-              <input type="text" class="form-control" id="birth-date" name="birth-date" value="{{user.birth-date|date:"dd/MM/yyyy"}}">
+              <input type="text" class="form-control" id="birth-date" name="birth-date" value="{{user.birth-date}}"> <!-- |date:"dd/MM/yyyy" -->
             </div>
             <div class="form-group col-md-6">
               <label for="blood-type">Tipo Sanguíneo</label>
@@ -27,17 +33,17 @@
             </div>
             <div class="form-group col-md-6">
               <label for="phone">Telefone</label>
-              <input type="text" class="form-control" id="phone" name="phone">
+              <input type="text" class="form-control" id="phone" name="phone" value="{{user.phone}}">
             </div>
 
             <div class="form-group col-md-6">
               <label for="bike-brand">Marca da Motocicleta</label>
-              <input type="text" class="form-control" id="bike-brand" name="bike-brand">
+              <input type="text" class="form-control" id="bike-brand" name="bike-brand" value="{{user.bike-brand}}">
             </div>
 
             <div class="form-group col-md-6">
               <label for="bike-model">Modelo da Motocicleta</label>
-              <input type="text" class="form-control" id="bike-model" name="bike-model">
+              <input type="text" class="form-control" id="bike-model" name="bike-model" value="{{user.bike-model}}">
             </div>
 
             <button type="submit" class="btn btn-success">Atualizar Perfil</button>
